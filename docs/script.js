@@ -5,6 +5,15 @@ document.addEventListener('DOMContentLoaded', function () {
         hljs.highlightAll();
     }
 
+    // Initialize Theme
+    initTheme();
+
+    // Initialize Search (if input exists)
+    initSearch();
+
+    // Initialize Progress Tracking (if article exists)
+    initProgress();
+
     // Sidebar Toggle
     const sidebarToggle = document.getElementById('sidebarToggle');
     const sidebar = document.getElementById('sidebar');
@@ -132,3 +141,131 @@ window.addEventListener('scroll', updateTOC);
 console.log('%c🎓 GitHub Workshop Wiki', 'font-size: 20px; font-weight: bold; color: #6366f1;');
 console.log('%cKapsamlı Git ve GitHub Eğitimi', 'font-size: 14px; color: #8b949e;');
 console.log('%c👉 https://github.com/Furk4nBulut/Github-Workshop', 'font-size: 12px; color: #10b981;');
+
+/* ===== Theme Logic ===== */
+function initTheme() {
+    const themeToggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
+
+    // Check local storage or system preference
+    const savedTheme = localStorage.getItem('theme');
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+
+    let currentTheme = savedTheme || systemTheme;
+    html.setAttribute('data-theme', currentTheme);
+    updateThemeIcon(currentTheme);
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            currentTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', currentTheme);
+            localStorage.setItem('theme', currentTheme);
+            updateThemeIcon(currentTheme);
+        });
+    }
+}
+
+function updateThemeIcon(theme) {
+    const themeToggle = document.getElementById('themeToggle');
+    if (!themeToggle) return;
+
+    const icon = themeToggle.querySelector('i');
+    if (theme === 'dark') {
+        icon.className = 'fas fa-moon';
+    } else {
+        icon.className = 'fas fa-sun';
+    }
+}
+
+/* ===== Search Logic ===== */
+function initSearch() {
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+
+    if (!searchInput || !searchResults) return;
+
+    // Index content (h2, h3 in article)
+    const headings = Array.from(document.querySelectorAll('.article h2, .article h3')).map(h => ({
+        id: h.id,
+        text: h.textContent,
+        type: h.tagName.toLowerCase()
+    }));
+
+    searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase();
+
+        if (query.length < 2) {
+            searchResults.style.display = 'none';
+            return;
+        }
+
+        const filtered = headings.filter(h => h.text.toLowerCase().includes(query));
+
+        if (filtered.length > 0) {
+            searchResults.innerHTML = filtered.map(item => `
+                <a href="#${item.id}" class="search-result-item">
+                    <span class="badgee ${item.type}">${item.type.toUpperCase()}</span>
+                    ${item.text}
+                </a>
+            `).join('');
+            searchResults.style.display = 'block';
+        } else {
+            searchResults.innerHTML = '<div class="no-results">Sonuç bulunamadı</div>';
+            searchResults.style.display = 'block';
+        }
+    });
+
+    // Close search on outside click
+    document.addEventListener('click', (e) => {
+        if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.style.display = 'none';
+        }
+    });
+}
+
+/* ===== Progress Logic ===== */
+function initProgress() {
+    const article = document.querySelector('.article');
+    if (!article) return;
+
+    // Create progress bar
+    const bar = document.createElement('div');
+    bar.className = 'progress-bar';
+    document.body.appendChild(bar);
+
+    window.addEventListener('scroll', () => {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        bar.style.width = scrolled + "%";
+
+        // Mark as completed in local storage if > 80%
+        if (scrolled > 80) {
+            const page = window.location.pathname.split('/').pop() || 'index.html';
+            if (page.startsWith('module')) {
+                const completed = JSON.parse(localStorage.getItem('completedModules') || '[]');
+                if (!completed.includes(page)) {
+                    completed.push(page);
+                    localStorage.setItem('completedModules', JSON.stringify(completed));
+                    markCompletedSidebar();
+                }
+            }
+        }
+    });
+
+    markCompletedSidebar();
+}
+
+function markCompletedSidebar() {
+    const completed = JSON.parse(localStorage.getItem('completedModules') || '[]');
+    completed.forEach(page => {
+        const link = document.querySelector(`.nav-item[href="${page}"]`);
+        if (link && !link.querySelector('.check-icon')) {
+            const check = document.createElement('i');
+            check.className = 'fas fa-check-circle check-icon';
+            check.style.marginLeft = 'auto';
+            check.style.color = 'var(--secondary)';
+            link.appendChild(check);
+        }
+    });
+}

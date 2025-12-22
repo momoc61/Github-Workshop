@@ -30,6 +30,120 @@
     --transition: all 0.2s ease;
 }
 
+/* Light Mode Overrides */
+[data-theme="light"] {
+    --bg-body: #ffffff;
+    --bg-sidebar: #f6f8fa;
+    --bg-content: #ffffff;
+    --bg-card: #ffffff;
+    --bg-card-hover: #f3f4f6;
+    --bg-code: #f6f8fa;
+
+    --text-primary: #24292f;
+    --text-secondary: #57606a;
+    --text-muted: #6e7781;
+
+    --border: #d0d7de;
+    --border-light: #d8dee4;
+}
+
+/* UI Elements */
+.progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #6366f1, #a855f7);
+    z-index: 1002;
+    transition: width 0.1s ease;
+}
+
+.nav-btn-icon {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.nav-btn-icon:hover {
+    color: var(--text-primary);
+    border-color: var(--text-secondary);
+    background: var(--bg-card-hover);
+}
+
+.search-container {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px 12px;
+    background: var(--bg-body);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #6366f1;
+}
+
+#searchResults {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-top: 5px;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 100;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.search-result-item {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+}
+
+.search-result-item:hover {
+    background: var(--bg-card-hover);
+    color: var(--text-primary);
+}
+
+.badgee {
+    display: inline-block;
+    padding: 2px 6px;
+    font-size: 10px;
+    border-radius: 4px;
+    margin-right: 8px;
+    background: var(--bg-code);
+    border: 1px solid var(--border);
+}
+
+/* Completed Icon */
+.check-icon {
+    font-size: 14px;
+}
+
 /* ===== Reset & Base ===== */
 * {
     margin: 0;

@@ -15,7 +15,20 @@
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="favicon.svg">
-</head>
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://furk4nbulut.github.io/Github-Workshop/module6.html">
+    <meta property="og:title" content="Modül 6: Vitrin ve Kariyer | GitHub Workshop">
+    <meta property="og:description" content="Sıfırdan Profesyonelliğe Kapsamlı Git ve GitHub Eğitimi">
+    <meta property="og:image" content="https://repository-images.githubusercontent.com/735606828/916b328a-c454-472d-9669-0268297669d0">
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://furk4nbulut.github.io/Github-Workshop/module6.html">
+    <meta property="twitter:title" content="Modül 6: Vitrin ve Kariyer | GitHub Workshop">
+    <meta property="twitter:description" content="Sıfırdan Profesyonelliğe Kapsamlı Git ve GitHub Eğitimi">
+    <meta property="twitter:image" content="https://repository-images.githubusercontent.com/735606828/916b328a-c454-472d-9669-0268297669d0">
+    </head>
 
 <body>
     <header class="header">
@@ -24,6 +37,9 @@
             <a href="index.html" class="logo"><i class="fab fa-github"></i><span>GitHub Workshop</span></a>
         </div>
         <div class="header-right">
+            <button id="themeToggle" class="nav-btn-icon" aria-label="Toggle Theme">
+                <i class="fas fa-moon"></i>
+            </button>
             <a href="index.html" class="header-link"><i class="fas fa-home"></i><span>Ana Site</span></a>
             <a href="wiki.html" class="header-link"><i class="fas fa-book"></i><span>Wiki</span></a>
             <a href="https://github.com/Furk4nBulut/Github-Workshop" target="_blank" class="header-link"><i
@@ -34,6 +50,10 @@
     <div class="main-wrapper">
         <aside class="sidebar" id="sidebar">
             <nav class="sidebar-nav">
+                <div class="search-container">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Wiki'de ara...">
+                    <div id="searchResults"></div>
+                </div>
                 <div class="nav-section">
                     <a href="wiki.html" class="nav-item"><i class="fas fa-book"></i><span>Wiki Ana Sayfa</span></a>
                     <a href="index.html" class="nav-item"><i class="fas fa-home"></i><span>← Tanıtım Sayfası</span></a>

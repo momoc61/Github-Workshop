@@ -81,8 +81,46 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Type animation for terminal
+    // Type animation for terminal
     typeTerminalAnimation();
+
+    // Theme Toggle
+    initThemeLanding();
 });
+
+function initThemeLanding() {
+    const themeToggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
+
+    // Check local storage or system preference
+    const savedTheme = localStorage.getItem('theme');
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+
+    let currentTheme = savedTheme || systemTheme;
+    html.setAttribute('data-theme', currentTheme);
+    updateThemeIcon(currentTheme);
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            currentTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', currentTheme);
+            localStorage.setItem('theme', currentTheme);
+            updateThemeIcon(currentTheme);
+        });
+    }
+}
+
+function updateThemeIcon(theme) {
+    const themeToggle = document.getElementById('themeToggle');
+    if (!themeToggle) return;
+
+    const icon = themeToggle.querySelector('i');
+    if (theme === 'dark') {
+        icon.className = 'fas fa-moon';
+    } else {
+        icon.className = 'fas fa-sun';
+    }
+}
 
 // Observer callback for animations
 const observer = new MutationObserver((mutations) => {
