@@ -10,11 +10,13 @@
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen?style=for-the-badge)](https://github.com/Furk4nBulut/Github-Workshop/pulls)
 [![Wiki](https://img.shields.io/badge/📚-Wiki-blue?style=for-the-badge)](https://github.com/Furk4nBulut/Github-Workshop/wiki)
+[![GitHub Pages](https://img.shields.io/badge/🌐-Canlı_Demo-6366f1?style=for-the-badge)](https://furk4nbulut.github.io/Github-Workshop/)
 
 **Bilgisayar Programcılığı ve Yazılım Mühendisliği Öğrencileri İçin**
 
 *Git ve GitHub'ı sıfırdan öğrenin, profesyonel seviyeye ulaşın!*
 
+[🌐 Canlı Demo](https://furk4nbulut.github.io/Github-Workshop/) · 
 [📖 Wiki'ye Git](https://github.com/Furk4nBulut/Github-Workshop/wiki) · 
 [🚀 Hızlı Başlangıç](#-hızlı-başlangıç) · 
 [📚 Müfredat](#-müfredat) · 
